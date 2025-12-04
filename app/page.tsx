@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useEffect, useRef } from 'react';
 import { Play, Pause, RotateCcw, Plus, Trash2, Settings, ListOrdered, Zap } from 'lucide-react';
 
@@ -236,7 +236,7 @@ const GanttChartAndLog: React.FC<{
 
         <div className="mb-10">
             <h3 className="text-sm font-bold text-slate-500 uppercase mb-4 flex justify-between items-center">
-                <span className="flex items-center"><ListOrdered className="w-4 h-4 mr-1 text-[#9E182B]"/> Ready Queue (Current State)</span>
+                <span className="flex items-center"><ListOrdered className="w-4 h-4 mr-1 text-[#9E182B]"/> Ready Queue (Current State: First to Last)</span>
                 <span className="text-xs text-[#9E182B] font-bold">{currentReadyQueue.length} Processes Waiting</span>
             </h3>
             
@@ -310,8 +310,9 @@ const GanttChartAndLog: React.FC<{
         
         {schedule.length > 0 && (
             <div className="bg-[#F2E0D2]/80 backdrop-blur-md border border-[#F9CBD6] p-6 rounded-3xl shadow-xl animate-in slide-in-from-bottom fade-in duration-500">
+              <div className="flex items-center space-x-2 overflow-x-auto scrollbar-thin scrollbar-thumb-[#F2AFBC] pb-2"></div>
                 <h3 className="text-xl font-bold text-[#9E182B] mb-4 flex items-center">
-                    <Zap className="w-5 h-5 mr-2 text-[#9E182B]" /> Ready Queue (Whole)
+                    <Zap className="w-5 h-5 mr-2 text-[#9E182B]" /> Execution Sequence Log (Full Service Order)
                 </h3>
                 
                 <div className="w-full bg-white rounded-xl border border-[#F9CBD6] relative overflow-hidden p-4">
@@ -345,7 +346,6 @@ const GanttChartAndLog: React.FC<{
                             );
                         })}
                     </div>
-                    <p className="text-xs text-slate-500 mt-2 italic">This shows the sequential order in which processes ran for a time slice, matching the FIFO flow of the ready queue.</p>
                 </div>
             </div>
         )}
@@ -587,6 +587,7 @@ export default function RoundRobinScheduler() {
 
             {completedProcesses.length > 0 && (
                <div className="bg-[#F2E0D2]/80 backdrop-blur-md rounded-3xl shadow-xl overflow-hidden border border-[#F9CBD6] mb-10">
+                <div className="flex items-center space-x-2 overflow-x-auto scrollbar-thin scrollbar-thumb-[#F2AFBC] pb-2">
                  <table className="w-full text-sm text-left">
                    <thead className="bg-[#F9CBD6] text-[#9E182B]">
                      <tr>
@@ -613,6 +614,7 @@ export default function RoundRobinScheduler() {
                      ))}
                    </tbody>
                  </table>
+                 </div>
                </div>
             )}
 
